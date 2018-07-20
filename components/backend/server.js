@@ -1,5 +1,6 @@
 'use strict';
 var express = require("express");
+var https = require('https');
 var bodyParser = require("body-parser");
 var utils = require("./lib/utils.js");
 var ServerConfig = require("./ServerConfig.js");
@@ -9,6 +10,13 @@ var listing = require('./routes/listing');
 
 var app = express();
 
+var fs = require('fs');
+
+// This line is from the Node.js HTTPS documentation.
+var options = {
+  key: fs.readFileSync('/home/cclark/dev/repo/iwcKey.pem'),
+  cert: fs.readFileSync('/home/cclark/dev/repo/iwcCert.pem')
+};
 
 //=======================================
 // Middleware
@@ -68,8 +76,19 @@ app.use(ServerConfig.APPLICATION_ROUTE + "/bower_components", express.static('..
 // Legacy support
 app.use(ServerConfig.ROOT_ROUTE, express.static('../../bower_components/ozp-iwc-owf7-widget-adapter/dist'));
 
-var server = app.listen(ServerConfig.SERVER_PORT, function () {
+/* 
+    Changing the "var server = " code at the bottom so this server will start with SSL
+    Using this as the IWC bridge when the widgets are https was causing a lot of 
+    "mixed content" heartache in the browsers.
+*/
+var server = https.createServer(options, app);
+server.listen(ServerConfig.SERVER_PORT);
+
+console.log('--->IWC Server listening at %s://%s:%s', ServerConfig.SERVER_PROTOCOL, ServerConfig.SERVER_DOMAIN_NAME, ServerConfig.SERVER_PORT);
+
+
+  /* var server = app.listen(ServerConfig.SERVER_PORT, function () {
     var host = server.address().address;
     var port = server.address().port;
-    console.log('IWC Example Backend listening at http://%s:%s', host, port);
-});
+    console.log('--->IWC Example Backend listening at https://%s:%s', host, port);
+}); */
