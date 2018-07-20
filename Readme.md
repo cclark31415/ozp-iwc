@@ -75,4 +75,3 @@ var iwc = new ozpIwc.Client({
   peerUrl: 'https://<i.p. address or domain>:13000/'
 });
 ```
-
