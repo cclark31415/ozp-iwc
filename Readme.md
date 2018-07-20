@@ -59,7 +59,7 @@ grunt serve
 ```
 
 A list of IWC registered applications can be found under the "My Apps" tab of the system.api page in the
-[IWC Debugger](https://localhost:13000/debugger/index.html#/system-api) once the server is running.
+[IWC Debugger](http://localhost:13000/debugger/index.html#/system-api) once the server is running.
 
 If you want to use this as your IWC bridge, you must include the following code in your HTML file:
 
@@ -75,3 +75,4 @@ var iwc = new ozpIwc.Client({
   peerUrl: 'https://<i.p. address or domain>:13000/'
 });
 ```
+
