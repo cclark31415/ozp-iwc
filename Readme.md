@@ -72,6 +72,6 @@ Your JavaScript code should instantiate the client using this:
 
 ```
 var iwc = new ozpIwc.Client({
-  peerUrl: 'https://18.209.54.28:13000/'
+  peerUrl: 'https://<i.p. address or domain>:13000/'
 });
 ```
