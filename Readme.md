@@ -61,3 +61,17 @@ grunt serve
 A list of IWC registered applications can be found under the "My Apps" tab of the system.api page in the
 [IWC Debugger](http://localhost:13000/debugger/index.html#/system-api) once the server is running.
 
+If you want to use this as your IWC bridge, you must include the following code in your HTML file:
+
+```
+ <script type="text/javascript" src="https://<i.p. address or domain>:13000/js/ozpIwc-client.js"></script> 
+```
+This will provide the JavaScript client for the widget.
+
+Your JavaScript code should instantiate the client using this:
+
+```
+var iwc = new ozpIwc.Client({
+  peerUrl: 'https://<i.p. address or domain>:13000/'
+});
+```
